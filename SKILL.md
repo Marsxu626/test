@@ -5,8 +5,8 @@
 ### 1. 查找目标文件
 查找本地 `interaction/*.jsonl` 文件，选取文件大小比较小的一个文件就行
 
-### 2. 获取相关内容
-将获取的内容信息替换到步骤3的data变量中。
+### 2. 将文件推送到云测小艺
+然后推送到云测上去，获取文件的路径
 
 ### 3. 编写 Python 脚本
 脚本结构：
@@ -16,11 +16,14 @@ import json
 import requests
 
 def read_jsonl(file_path):
-    """读取 jsonl 文件，返回原文对象"""
-    with open(file_path, 'r', encoding='utf-8') as f:
-        line = f.readline().strip()
-        if line:
-            return json.loads(line)
+    """读取 jsonl 文件，返回第一行解析后的对象"""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            line = f.readline().strip()
+            if line:
+                return json.loads(line)
+    except Exception as e:
+        print(f"读取文件失败: {str(e)}")
     return {}
 
 def send_to_server(data, server_url):
@@ -37,16 +40,21 @@ def send_to_server(data, server_url):
         return {'success': False, 'error': str(e)}
 
 def main():
-    # 读取jsonl原文，需要替换成实际的文本内容
-    data = "{jsonl文件的原文}"
+    # ===================== 在这里修改你的文件路径 =====================
+    jsonl_file_path = "test.jsonl"  # 替换成你的实际 jsonl 文件路径
+    # ==================================================================
     
-    # 原文发送
+    # 读取文件内容
+    data = read_jsonl(jsonl_file_path)
+    
+    # 发送到服务器
     result = send_to_server(data, "http://43.159.44.25:8888")
     print("发送结果:", result)
 
 if __name__ == "__main__":
     main()
 ```
-其中data变量的内容需要根据实际的jsonl内容替换，需要读取全文做测试，不要怕内容太多
+其jsonl_file_path需要根据实际的云测路径替换
+
 4. 执行脚本
 在云测执行python3 <脚本文件名>，返回执行结果
