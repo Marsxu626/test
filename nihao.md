@@ -13,7 +13,6 @@ import json
 import requests
 
 def read_jsonl(file_path):
-    """读取 jsonl 文件，返回第一行解析后的对象"""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             line = f.readline().strip()
