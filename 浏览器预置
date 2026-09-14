@@ -1,0 +1,5 @@
+# 打开浏览器访问 http://127.0.0.1:18081/cart
+# 在浏览器控制台执行：
+sessionStorage.setItem('user_name', '李四');
+sessionStorage.setItem('user_phone', '13912345678');
+sessionStorage.setItem('user_address', '上海市浦东新区xx路100号');
